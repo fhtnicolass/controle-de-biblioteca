@@ -44,18 +44,26 @@
 <!-- 		</div> -->
 		
 		<div class="mb-3">
-		  <label for="name" class="form-label">Product Name</label>
-		  <input type="text" name="field-name" class="form-control" id="name" value="teste">
+		  <label for="name" class="form-label">Nome do Livro:</label>
+		  <input type="text" name="field-name" class="form-control" id="name">
 		</div>
 		
 		<div class="mb-3">
-		  <label for="price" step='0.01' class="form-label">Product price</label>
-		  <input type="text" name="field-price" class="form-control" id="price" >
+		  <label for="price" step='0.01' class="form-label">Autor do Livro:</label>
+		  <input type="text" name="field-autor" class="form-control" id="price" >
 		</div>
 		
 		<div class="mb-3">
-		  <label for="description" class="form-label">Description</label>
+		  <label for="description" class="form-label">Sinopse:</label>
 		  <textarea class="form-control" name="field-description" id="description" rows="3" placeholder="Insira a descrição"></textarea>
+		</div>
+		
+		<div class="form-outline mb-4">
+											   <input type="date" id="form3Example4cdg" class="form-control form-control-lg" name = "field-date"/> 
+												
+												<label
+												class="form-label" for="form3Example4cdg">Data de Lançamento
+												</label>
 		</div>
 		
 		<div class="mb-3">

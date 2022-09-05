@@ -31,21 +31,17 @@ public class LivroRegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("POST - CADASTRAR USUARIO");
 		Livro livro = new Livro();
-		String id = req.getParameter("field-id");
 
 		String name = req.getParameter("field-name");
 
 		String autor = req.getParameter("field-autor");
 
 		String description = req.getParameter("field-description");
-				
-		Status status = Status.valueOf(req.getParameter("field-status"));
 		
 		String date = req.getParameter("field-date");
 		
-		livro.setId(Integer.valueOf(id));
 		livro.setName(name);
-		livro.setStatus(status);
+		livro.setStatus(Status.DISPONIVEL);
 		livro.setAutor(autor);
 		livro.setDescription(description);
 		livro.setDataLancamento(date);
