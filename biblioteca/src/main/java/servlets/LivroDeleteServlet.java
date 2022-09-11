@@ -26,7 +26,7 @@ public class LivroDeleteServlet extends HttpServlet {
 		
 		repository.deleteById(id);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/products");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/livros");
 		dispatcher.forward(req, resp);
 		
 	}

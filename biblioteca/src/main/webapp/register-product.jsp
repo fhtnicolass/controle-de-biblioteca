@@ -38,14 +38,9 @@
 
 	<form action="<%= request.getContextPath() %>/livros/register" method="post">
 	
-<!-- 		<div class="mb-3"> -->
-<!-- 		  <label for="id" class="form-label">#id</label> -->
-<!-- 		  <input type="number" name="field-id" class="form-control" id="id" value="" readonly> -->
-<!-- 		</div> -->
-		
 		<div class="mb-3">
 		  <label for="name" class="form-label">Nome do Livro:</label>
-		  <input type="text" name="field-name" class="form-control" id="name">
+		  <input type="text" name="field-name" class="form-control" id="name" >
 		</div>
 		
 		<div class="mb-3">
@@ -55,7 +50,7 @@
 		
 		<div class="mb-3">
 		  <label for="description" class="form-label">Sinopse:</label>
-		  <textarea class="form-control" name="field-description" id="description" rows="3" placeholder="Insira a descrição"></textarea>
+		  <textarea class="form-control" name="field-description" id="description" rows="3"></textarea>
 		</div>
 		
 		<div class="form-outline mb-4">
@@ -71,7 +66,14 @@
 		</div>
 	
 	</form>
-
+	
+	<% if(request.getAttribute("error") == "dberror" || request.getAttribute("error") == "nullerror"){ %>
+	
+		  <p style="color: red"> <%= request.getAttribute("erro").toString() %></p> 
+		  
+	<%  } %>
+  	
+  	
 </div>
 </body>
 </html>

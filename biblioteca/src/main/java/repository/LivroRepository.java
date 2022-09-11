@@ -12,6 +12,7 @@ import java.util.List;
 
 import connection.ConnectionFactory;
 import models.Livro;
+import models.Livro.Status;
 
 public class LivroRepository implements ILivroRepository {
 	
@@ -73,7 +74,9 @@ public class LivroRepository implements ILivroRepository {
 			statement.setString(1, livro.getName());
 			statement.setDate(2, dateFinal);
 			statement.setString(3, livro.getDescription());
-			statement.setInt(4, livro.getId());
+			statement.setString(4, livro.getAutor());
+			statement.setString(5, livro.getStatus().getLabel());
+			statement.setInt(6, livro.getId());
 			
 			statement.executeUpdate();
 		
@@ -127,8 +130,9 @@ public class LivroRepository implements ILivroRepository {
 				String description = result.getString("description");
 				String autor = result.getString("autor");
 				String date = result.getDate("datalancamento").toString();
+				Status status = Status.valueOf(result.getString("status"));
 				
-				Livro p = new Livro(id, name, description, autor, date);
+				Livro p = new Livro(id, name, description, autor, date, status);
 				
 				livros.add(p);
 			}
@@ -164,21 +168,20 @@ public class LivroRepository implements ILivroRepository {
 	
 		try {
 			
-			statement = conn.prepareStatement("SELECT * FROM products WHERE id = ?");
+			statement = conn.prepareStatement("SELECT * FROM livros WHERE id = ?");
 			statement.setInt(1, id);
 
 			result = statement.executeQuery();
 			
 			while(result.next()) {
 				
-				Integer pid = result.getInt("id");
 				String name = result.getString("name");
 				String description = result.getString("description");
 				String autor = result.getString("autor");
 				String date = result.getDate("datalancamento").toString();
+				Status status = Status.valueOf(result.getString("status"));
 				
-				
-				livro = new Livro(id, name, description, autor, date);
+				livro = new Livro(id, name, description, autor, date, status);
 				
 			}
 			

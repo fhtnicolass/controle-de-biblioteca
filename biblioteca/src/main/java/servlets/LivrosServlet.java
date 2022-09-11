@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Livro;
-import models.Product;
 import repository.LivroRepository;
 
 @WebServlet(name = "livros" ,urlPatterns = {"", "/livros"})
@@ -27,18 +26,20 @@ public class LivrosServlet extends HttpServlet {
 		
 		List<Livro> livros = new ArrayList<>();
 		
-		try {
+		RequestDispatcher dispatcher = req.getRequestDispatcher("products.jsp");
+
+		livros = repository.findAll();
 		
-			livros = repository.findAll();
-		
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		if (livros.isEmpty()) {
+			req.setAttribute("erro", "nullerror");
+			dispatcher.forward(req, resp);
+		} else {
+			req.setAttribute("livros", livros);
+			dispatcher.forward(req, resp);
 		}
 		
-		req.setAttribute("livros", livros);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("products.jsp");
-		dispatcher.forward(req, resp);
+		
 		
 	}
 

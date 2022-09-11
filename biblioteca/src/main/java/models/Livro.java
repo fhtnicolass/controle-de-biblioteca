@@ -14,13 +14,15 @@ public class Livro {
 	
 	public Livro() {}
 	 
-	public Livro(Integer id, String name, String description, String autor, String data) {
+	public Livro(Integer id, String name, String description, String autor, String date, Status status) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.autor = autor;
 		this.description = description;
 		this.resumedDescription = this.description;
-		this.dataLancamento = dateStringToLocalDate(data); 
+		this.dataLancamento = dateStringToLocalDate(date); 
+		this.status = status;
 
 	}
 	
@@ -80,6 +82,10 @@ public class Livro {
 	public void setStatus(Status status) {	
 		
 		this.status = status;
+		
+		this.status.label = status.label;
+				
+		
 	}
 
 	public void setDataLancamento(String data) {
@@ -115,10 +121,9 @@ public class Livro {
 
 	        public String label;
 
-	        @SuppressWarnings("unused")
 			public String getLabel() {
 	            return label;
 	        }
-	    } 
+	  } 
 
 }

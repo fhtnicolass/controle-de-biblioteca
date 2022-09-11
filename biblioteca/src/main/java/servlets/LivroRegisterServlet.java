@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Livro;
 import models.Livro.Status;
-import models.Product;
 import repository.LivroRepository;
 
 @WebServlet(name = "register", urlPatterns = {"/livros/register"})
@@ -31,28 +30,35 @@ public class LivroRegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("POST - CADASTRAR USUARIO");
 		Livro livro = new Livro();
-
+		
+		req.setAttribute("error", "nenhum");
+		
 		String name = req.getParameter("field-name");
 
 		String autor = req.getParameter("field-autor");
-
+		
 		String description = req.getParameter("field-description");
 		
 		String date = req.getParameter("field-date");
 		
-		livro.setName(name);
-		livro.setStatus(Status.DISPONIVEL);
-		livro.setAutor(autor);
-		livro.setDescription(description);
-		livro.setDataLancamento(date);
-		LivroRepository repository = new LivroRepository();
-		if (repository.insert(livro)) {
-			resp.sendRedirect("/Aula9/livros");
-		} else {
-			// enviar um atributo msg de erro
-			System.out.println("fds");
-			
+		if(name != null || autor != null || description != null || date != null) {
+			livro.setName(name);
+			livro.setStatus(Status.DISPONIVEL);
+			livro.setAutor(autor);
+			livro.setDescription(description);
+			livro.setDataLancamento(date);
+			LivroRepository repository = new LivroRepository();
+			if(repository.insert(livro)) {
+			   resp.sendRedirect("/Aula9/livros");
+			}else {
+				req.setAttribute("error", "dberror");
+				resp.sendRedirect("/Aula9/livros/register");
+			}
+		}else {
+			req.setAttribute("error", "nullerror");
+			resp.sendRedirect("/Aula9/livros/register");
 		}
+				
 
 		
 

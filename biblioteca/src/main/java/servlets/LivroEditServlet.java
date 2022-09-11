@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -13,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Livro;
 import models.Livro.Status;
-import models.Product;
+
 import repository.ILivroRepository;
 import repository.LivroRepository;
 
@@ -22,52 +21,54 @@ import repository.LivroRepository;
 public class LivroEditServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ILivroRepository repository = new LivroRepository();
 
 		req.setCharacterEncoding("utf-8");
+		
+		Integer id = Integer.valueOf(req.getParameter("id"));
 
-		if (req.getParameter("id") != null) {
+		Livro livro = repository.findById(id);
 
-			Integer id = Integer.valueOf(req.getParameter("id"));
+		req.setAttribute("livro", livro);
 
-			Livro livro = repository.findById(id);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/edit-product.jsp");
+		dispatcher.forward(req, resp);
 
-			req.setAttribute("livro", livro);
-
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/edit-product.jsp");
-			dispatcher.forward(req, resp);
-
-		} else {
-
-			Livro livro = new Livro();
-
-			String id = req.getParameter("field-id");
-
-			String name = req.getParameter("field-name");
-
-			String autor = req.getParameter("field-autor");
-
-			String description = req.getParameter("field-description");
-			
-			Status status = Status.valueOf(req.getParameter("field-status"));
-			
-			String date = req.getParameter("field-date");
-			
-			livro.setId(Integer.valueOf(id));
-			livro.setName(name);
-			livro.setStatus(status);
-			livro.setAutor(autor);
-			livro.setDescription(description);
-			livro.setDataLancamento(date);
-			repository.update(livro);
-
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/products");
-			dispatcher.forward(req, resp);
-
-		}
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
+		ILivroRepository repository = new LivroRepository();
+		
+		Integer id = Integer.valueOf(req.getParameter("field-id"));
+		
+		Livro livro = repository.findById(id);
+
+		String name = req.getParameter("field-name");
+
+		String autor = req.getParameter("field-autor");
+
+		String description = req.getParameter("field-description");
+		
+		Status status = Status.valueOf(req.getParameter("status"));
+		
+		String date = req.getParameter("field-date");
+			
+		livro.setName(name);
+		livro.setStatus(status);
+		livro.setAutor(autor);
+		livro.setDescription(description);
+		livro.setDataLancamento(date);
+		repository.update(livro);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/products.jsp");
+		dispatcher.forward(req, resp);
+		
+	}
+		
+	
 }
