@@ -38,7 +38,8 @@
     </div>
   </header>
   
-   <a class="btn btn-primary" href="<%= request.getContextPath() %>/livros/register">novo livro</a>
+   <a class="btn btn-primary" href="<%= request.getContextPath() %>/register">novo livro</a>
+   
 		<% List<Livro> livros = (List<Livro>) request.getAttribute("livros"); %>
 
 	<table class="table">
@@ -67,7 +68,7 @@
 					<td><%= p.getAutor() %></td>
 					<td><%= p.getResumedDescription()%></td>
 					<td><%= p.getStatus().getLabel() %></td>
-					<td><a href="<%= request.getContextPath() %>/livros/edit?id=<%= p.getId()%>">editar</a> | <a href="<%= request.getContextPath() %>/livros/delete?id=<%= p.getId()%>">excluir</a></td>
+					<td><a href="<%= request.getContextPath() %>/edit?id=<%= p.getId()%>">editar</a> | <a href="<%= request.getContextPath() %>/delete?id=<%= p.getId()%>">excluir</a></td>
 				</tr>	
 			<% } %>
 			

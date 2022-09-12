@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="repository.LivroRepository"%>
-<%@ page import="models.Product, java.util.List"%>
+<%@ page import="models.Livro, java.util.List"%>
 
 <!DOCTYPE html>
 <html>
@@ -36,7 +36,7 @@
   </header>
 
 
-	<form action="<%= request.getContextPath() %>/livros/register" method="post">
+	<form action="<%= request.getContextPath() %>/register" method="post">
 	
 		<div class="mb-3">
 		  <label for="name" class="form-label">Nome do Livro:</label>

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.Livro;
 import repository.LivroRepository;
 
-@WebServlet(name = "livros" ,urlPatterns = {"", "/livros"})
+@WebServlet(name = "livros" ,urlPatterns = {"/livros"})
 public class LivrosServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

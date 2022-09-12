@@ -14,7 +14,7 @@ import models.Livro;
 import models.Livro.Status;
 import repository.LivroRepository;
 
-@WebServlet(name = "register", urlPatterns = {"/livros/register"})
+@WebServlet(name = "register", urlPatterns = {"/register"})
 public class LivroRegisterServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -49,14 +49,14 @@ public class LivroRegisterServlet extends HttpServlet {
 			livro.setDataLancamento(date);
 			LivroRepository repository = new LivroRepository();
 			if(repository.insert(livro)) {
-			   resp.sendRedirect("/Aula9/livros");
+			   resp.sendRedirect("/biblioteca");
 			}else {
 				req.setAttribute("error", "dberror");
-				resp.sendRedirect("/Aula9/livros/register");
+				resp.sendRedirect("/register");
 			}
 		}else {
 			req.setAttribute("error", "nullerror");
-			resp.sendRedirect("/Aula9/livros/register");
+			resp.sendRedirect("/register");
 		}
 				
 

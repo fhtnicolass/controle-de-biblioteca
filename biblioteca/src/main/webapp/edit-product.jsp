@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="repository.LivroRepository"%>
-<%@ page import="models.Product, java.util.List"%>
+<%@ page import="models.Livro, java.util.List"%>
 
 <!DOCTYPE html>
 <html>
@@ -43,7 +43,7 @@
 
 		<% Livro livro = (Livro) request.getAttribute("livro"); %>
 
-		<form action="<%= request.getContextPath() %>/livros/edit"
+		<form action="<%= request.getContextPath() %>/edit"
 			method="post" enctype="multipart/form-data">
 
 			<div class="mb-3">

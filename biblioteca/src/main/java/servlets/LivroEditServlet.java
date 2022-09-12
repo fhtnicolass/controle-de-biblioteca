@@ -17,7 +17,7 @@ import repository.ILivroRepository;
 import repository.LivroRepository;
 
 @MultipartConfig
-@WebServlet("/livros/edit")
+@WebServlet("/edit")
 public class LivroEditServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -65,7 +65,7 @@ public class LivroEditServlet extends HttpServlet {
 		livro.setDataLancamento(date);
 		repository.update(livro);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/products.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/");
 		dispatcher.forward(req, resp);
 		
 	}
