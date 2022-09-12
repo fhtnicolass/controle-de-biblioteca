@@ -58,7 +58,7 @@ public class LivroRepository implements ILivroRepository {
 	}
 
 	@Override
-	public Livro update(Livro livro) {
+	public Boolean update(Livro livro) {
 		
 		PreparedStatement statement = null;
 				
@@ -84,7 +84,7 @@ public class LivroRepository implements ILivroRepository {
 			e.printStackTrace();
 		}
 		
-		return livro;
+		return true;
 	}
 
 	@Override

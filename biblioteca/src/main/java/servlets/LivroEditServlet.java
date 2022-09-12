@@ -38,6 +38,7 @@ public class LivroEditServlet extends HttpServlet {
 
 	}
 
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -53,20 +54,47 @@ public class LivroEditServlet extends HttpServlet {
 		String autor = req.getParameter("field-autor");
 
 		String description = req.getParameter("field-description");
+		String date = req.getParameter("field-date");	
 		
-		Status status = Status.valueOf(req.getParameter("status"));
+		if(date.length() > 10) { date = "";};
+		String error = null;
 		
-		String date = req.getParameter("field-date");
+		Status status = null;
+		
+		try {
+			status = Status.valueOf(req.getParameter("status")); 
+		} catch (Exception e) {
+			// TODO Auto-generated catch bl
+			error = "";
+		}
+	
+		
+		
+		if(name != null || autor != null || description != null  || date.isBlank() == false  || error != null) {
+		    livro.setName(name);
+			livro.setStatus(status);
+			livro.setAutor(autor);
+			livro.setDescription(description);
+			try {
+				livro.setDataLancamento(date);
+			} catch (Exception e) {
+				req.setAttribute("error", "error");
+				req.setAttribute("livro", livro);
+				RequestDispatcher dispatcher = req.getRequestDispatcher("/edit-product.jsp");
+				dispatcher.forward(req, resp);
+			}
 			
-		livro.setName(name);
-		livro.setStatus(status);
-		livro.setAutor(autor);
-		livro.setDescription(description);
-		livro.setDataLancamento(date);
-		repository.update(livro);
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/");
-		dispatcher.forward(req, resp);
+			if(repository.update(livro)) {
+			   resp.sendRedirect("/biblioteca");
+			}else {
+				req.setAttribute("error", "error");
+				resp.sendRedirect("/edit");
+			}
+			
+		}else {
+			req.setAttribute("error", "error");
+			resp.sendRedirect("/edit");
+		}
 		
 	}
 		

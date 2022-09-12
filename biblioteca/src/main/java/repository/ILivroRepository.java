@@ -8,7 +8,7 @@ public interface ILivroRepository {
 	
 	public Boolean insert(Livro livro);
 	
-	public Livro update(Livro product);
+	public Boolean update(Livro product);
 	
 	public Integer deleteById(Integer id);
 	

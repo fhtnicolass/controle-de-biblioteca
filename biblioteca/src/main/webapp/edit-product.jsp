@@ -89,8 +89,8 @@
 
 				<div class="form-check">
 					<input type="radio" class="form-check-input" id="radio2"
-						name="status" value="DISPONIVEL"> <label
-						class="form-check-label" for="radio2">DISPONIVEL</label>
+						name="status" value="DISPONIVEL" checked> <label
+						class="form-check-label" for="radio2" >DISPONIVEL</label>
 				</div>
 				<div class="form-check">
 					<input type="radio" class="form-check-input" id="radio3"
@@ -104,7 +104,9 @@
 			</div>
 
 		</form>
-
+		<% if (request.getAttribute("error") == "error") { %>
+				 <td style = "color:red">ERRO: DATA INVALIDA<td>	
+		<% }%>
 	</div>
 </body>
 </html>
